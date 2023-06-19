@@ -1,115 +1,110 @@
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
+import { useState } from 'react';
+import utilStyles from '../styles/utils.module.css';
+import { S10 } from "../node_modules/s10"
 
 export default function Home() {
+  function calculateCheckDigit(firstEightDigits) {
+    if (!firstEightDigits) {
+      throw new Error('Empty or incorrect first eight digits passed.');
+    }
+
+    if (typeof firstEightDigits === 'number') {
+      firstEightDigits = firstEightDigits.toString().padStart(8, '0');
+    }
+
+    const digits = firstEightDigits.split('');
+    const sum = digits[0] * 8
+      + digits[1] * 6
+      + digits[2] * 4
+      + digits[3] * 2
+      + digits[4] * 3
+      + digits[5] * 5
+      + digits[6] * 9
+      + digits[7] * 7;
+
+    let checkDigit = 11 - (sum % 11);
+
+    if (checkDigit === 10) {
+      return 0;
+    }
+
+    if (checkDigit === 11) {
+      return 5;
+    }
+
+    return checkDigit;
+  }
+
+  function trackingNumberIsValid(trackingNumber) {
+    if (!trackingNumber) {
+      return false;
+    }
+
+    if (trackingNumber.length !== 13) {
+      return false;
+    }
+
+    if (!trackingNumber.match(/[A-Z]{2}\d{9}[A-Z]{2}/)) {
+      return false;
+    }
+
+    const eightNumbers = trackingNumber.substr(2, 8);
+    const checkDigit = parseInt(trackingNumber.substr(10, 1));
+    const expectedCheckDigit = calculateCheckDigit(eightNumbers);
+
+    if (checkDigit === expectedCheckDigit) {
+      return true;
+    }
+    return false;
+  }
+  const [isInputOk, setIsInputOk] = useState(true);
+  const [inputContent, setInputContent] = useState('');
+
+  const handleTrackButtonClick = () => {
+    if (trackingNumberIsValid(inputContent)) {
+      console.log("das rite nigga")
+      setIsInputOk(true)
+    } else {
+      console.log("dat shit wack")
+      setIsInputOk(false)
+    }
+    console.log(trackingNumberIsValid(inputContent)); // You can replace console.log with your desired logic
+  };
+
+  const handleInputChange = (event) => {
+    setInputContent(event.target.value);
+  };
   return (
-    <div className={styles.container}>
+    <>
       <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title> Track your stuff! </title>
       </Head>
-
-      <main>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing <code>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+      <div className={utilStyles.cardStyle}>
+        <div className={utilStyles.searchBarStyle}>
+          <div className={utilStyles.titleContainer}>
+            <h2 className={utilStyles.title} > Track your stuff here!</h2>
+          </div>
+          <div className={utilStyles.searchComponents}>
+            <input
+              className={utilStyles.inputStyle}
+              type="text"
+              placeholder="Let's see where your package is"
+              onChange={handleInputChange}
+            />
+            <button className={utilStyles.trackButton} onClick={handleTrackButtonClick}>
+              Track
+            </button>
+          </div>
+          <div className={utilStyles.validatorContainer}>
+            {isInputOk ? (
+              ""
+            ) : (
+              <p className={utilStyles.validatorText} >The tracking code is invalid.</p>
+            )}
+          </div>
         </div>
-      </main>
-
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel" className={styles.logo} />
-        </a>
-      </footer>
-
-      <style jsx>{`
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        footer img {
-          margin-left: 0.5rem;
-        }
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          text-decoration: none;
-          color: inherit;
-        }
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
-    </div>
-  )
+      </div>
+    </>
+  );
 }

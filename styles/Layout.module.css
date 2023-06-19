@@ -1,0 +1,13 @@
+.container {
+    max-width: 48rem;
+    padding: 1rem;
+    margin:  auto 0rem; 
+    background-color: aqua;
+    align-items: center;
+    justify-content: center;
+  }
+    
+  .backToHome {
+    margin: 3rem 0 0;
+  }
+  

@@ -1,0 +1,91 @@
+.lightText {
+  color: #666;
+}
+
+.inputStyle {
+  width: 100%;
+  height: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: .25rem;
+}
+
+.inputStyle:active {
+  outline: none;
+  border: 1px solid #999;
+
+}
+
+.searchBarStyle {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 48rem;
+  background-color: #fafafa;
+  padding: 1rem;
+  border-radius: .25rem;
+  margin-bottom: 2rem;
+}
+
+.searchComponents {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 1.5rem;
+  margin-bottom: 0;
+
+}
+
+.cardStyle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  flex-direction: column;
+  border-radius: .25rem;
+}
+
+.trackButton {
+  width: 5rem;
+  height: 1.5rem;
+  color: white;
+  background-color: green;
+  margin-left: .5rem;
+  border: none;
+  outline: none;
+  border-radius: .25rem;
+
+}
+
+.trackButton:active {
+  border-color: darkgreen;
+  background-color: darkgreen;
+}
+
+.title {
+  color: #1a4c8a;
+  margin-bottom: .25rem;
+}
+
+.subTitle {
+  margin: .025rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.titleContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.validatorContainer {
+  color: red;
+  font-size:.6rem;
+  margin-top: 0rem;
+}
+.validatorText{
+  margin-top: 0rem
+}
