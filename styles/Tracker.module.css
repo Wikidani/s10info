@@ -1,0 +1,29 @@
+.cardContainer {
+  max-width: 48rem;
+  padding: 1rem;
+  margin: auto 0rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.backToHome {
+  margin: 3rem 0 0;
+}
+
+.trackingContainer {
+  background-color: #fafafa;
+  margin: 1rem;
+  padding: 1rem;
+  position: relative;
+  box-sizing: content-box;
+  width: 30rem;
+}
+
+.card {
+  background-color: aqua;
+  box-sizing: content-box;
+  width: 100%;
+}
+.aa{
+  display: block;
+}

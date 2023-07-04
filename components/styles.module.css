@@ -1,0 +1,13 @@
+.cardContainer {
+    background-color: lightgray;
+    width: 100%;
+}
+
+.apiText{
+    font-size: small;
+    margin: .25rem;
+}
+
+.apiTextSmall{
+    font-size: x-small;
+}

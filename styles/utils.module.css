@@ -15,16 +15,7 @@
 
 }
 
-.searchBarStyle {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  width: 48rem;
-  background-color: #fafafa;
-  padding: 1rem;
-  border-radius: .25rem;
-  margin-bottom: 2rem;
-}
+
 
 .searchComponents {
   display: flex;
@@ -38,11 +29,22 @@
 
 .cardStyle {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  flex-direction: column;
+  box-sizing: content-box;
+  width: 48rem;
+  border-radius: 0.25rem;
+  position: relative;
+  padding: 1rem;
+  background-color: #fafafa;
+
+}
+
+.card {
   border-radius: .25rem;
+  margin-bottom: 2rem;
+  width: 100%;
 }
 
 .trackButton {

@@ -1,18 +1,17 @@
 import Head from 'next/head';
 import { useState } from 'react';
 import utilStyles from '../styles/utils.module.css';
-import { S10 } from "../node_modules/s10"
+import { useRouter } from 'next/router';
 
 export default function Home() {
+  const router = useRouter();
   function calculateCheckDigit(firstEightDigits) {
     if (!firstEightDigits) {
       throw new Error('Empty or incorrect first eight digits passed.');
     }
-
     if (typeof firstEightDigits === 'number') {
       firstEightDigits = firstEightDigits.toString().padStart(8, '0');
     }
-
     const digits = firstEightDigits.split('');
     const sum = digits[0] * 8
       + digits[1] * 6
@@ -22,17 +21,13 @@ export default function Home() {
       + digits[5] * 5
       + digits[6] * 9
       + digits[7] * 7;
-
     let checkDigit = 11 - (sum % 11);
-
     if (checkDigit === 10) {
       return 0;
     }
-
     if (checkDigit === 11) {
       return 5;
     }
-
     return checkDigit;
   }
 
@@ -40,31 +35,32 @@ export default function Home() {
     if (!trackingNumber) {
       return false;
     }
-
     if (trackingNumber.length !== 13) {
       return false;
     }
-
     if (!trackingNumber.match(/[A-Z]{2}\d{9}[A-Z]{2}/)) {
       return false;
     }
-
     const eightNumbers = trackingNumber.substr(2, 8);
     const checkDigit = parseInt(trackingNumber.substr(10, 1));
     const expectedCheckDigit = calculateCheckDigit(eightNumbers);
-
     if (checkDigit === expectedCheckDigit) {
       return true;
     }
     return false;
   }
+
   const [isInputOk, setIsInputOk] = useState(true);
   const [inputContent, setInputContent] = useState('');
-
   const handleTrackButtonClick = () => {
+
     if (trackingNumberIsValid(inputContent)) {
-      console.log("das rite nigga")
       setIsInputOk(true)
+      router.push({
+        pathname: '/tracker',
+        //packageId: { inputContent },
+        query: { packageId: inputContent },
+      });
     } else {
       console.log("dat shit wack")
       setIsInputOk(false)
@@ -81,7 +77,7 @@ export default function Home() {
         <title> Track your stuff! </title>
       </Head>
       <div className={utilStyles.cardStyle}>
-        <div className={utilStyles.searchBarStyle}>
+        <div className={utilStyles.card}>
           <div className={utilStyles.titleContainer}>
             <h2 className={utilStyles.title} > Track your stuff here!</h2>
           </div>
@@ -106,5 +102,5 @@ export default function Home() {
         </div>
       </div>
     </>
-  );
+  ) 
 }
