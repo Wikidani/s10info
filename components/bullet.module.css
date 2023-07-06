@@ -1,0 +1,13 @@
+.bullet {
+    margin-left: -20px;
+    width: 12px;
+    fill: #c00;
+    float: left;
+    padding-right: 10px;
+}
+
+.list .bullet.big {
+    width: 16px;
+    margin-left: -22px;
+    padding-right: 8px;
+}

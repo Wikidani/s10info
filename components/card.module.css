@@ -1,0 +1,47 @@
+.list {
+    list-style-type: none;
+  }
+  
+  .list li {
+    position: relative;
+    margin: 0;
+    padding-bottom: 1em;
+    padding-left: 20px;
+  }
+  
+  .list li:before {
+    background-color: #c00;
+    width: 2px;
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 5px;
+  }
+  
+  .list li:first-child:before {
+    top: 15px;
+  }
+  
+  .list li:last-child:before {
+    height: 11px;
+  }
+  
+  .list .bullet {
+    margin-left: -20px;
+    width: 12px;
+    fill: #c00;
+    float: left;
+    padding-right: 10px;
+  }
+  
+  .list .bullet.big {
+    width: 16px;
+    margin-left: -22px;
+    padding-right: 8px;
+  }
+  
+  .list a {
+    color: green;
+  }
+  
